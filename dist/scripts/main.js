@@ -1,0 +1,1 @@
+console.log("'Allo 'Allo!");var ij=impress();$(document).ready(function(){ij.init()});
