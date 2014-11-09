@@ -24,20 +24,55 @@
 /*.impress-not-supported*/
 
 $green: #00a82b;
+$yellow: #ffd900;
 
 body {
 	background-color: $green;
 	color: #fff;
 	font-family: "coquette","lucida grande", tahoma, sans-serif;
-	font-size: 38px;
-	line-height: 2.2em;
+	font-size: 60px;
+	line-height: 1.6em;
 	margin: 0;
 	padding: 0;
+	text-align: center;
+}
+
+p,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 a {
-	color: #ffd900;
+	color: $yellow;
 	text-decoration: none;
+}
+
+h2 {
+	color: $yellow;
+}
+
+h3 {
+	font-size: 1.1em;
+}
+
+small {
+	font-size: 0.6em;
+}
+
+.compressed {
+	letter-spacing: -0.06em;
 }
 
 .step {
@@ -46,18 +81,46 @@ a {
 
 .impress-enabled {
 	.step {
-		opacity: 0.67;
+		opacity: 0.33;
 		transition: opacity, 1s;
 		position: relative;
 		width: 900px;
 		padding: 40px;
 		margin: 20px auto;
 		
+		img {
+			height: auto;
+			opacity: 0;
+			position: absolute;
+			right: 20px;
+			top: 95px;
+			width: 370px;
+			margin-left: -100px;
+			
+			transition: 1s all;
+			transition-delay: 400ms;
+		}
+		
 		&.active {
 			opacity: 1;
+			
+			img {
+				right: 0;
+				opacity: 1;
+			}
 		}
 	}
 }
+
+.step.info {
+	font-size: 38px;
+	line-height: normal;
+	text-align: left;
+}
+
+
+
+/* HINT */
 
 .hint {
     /*
