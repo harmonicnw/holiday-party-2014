@@ -75,7 +75,7 @@ module.exports = function (grunt) {
         open: true,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
-        hostname: 'localhost'
+        hostname: '10.1.10.97' //'localhost'
       },
       livereload: {
         options: {

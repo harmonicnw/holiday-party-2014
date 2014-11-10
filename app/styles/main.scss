@@ -109,6 +109,7 @@ small {
 	
 	img.snowflake {
 		display: none;
+		height: 120px;
 		margin: 26vh 0 0 0;
 		width: 120px;
 	}
@@ -168,16 +169,19 @@ small {
 		z-index: -1;
 	}
 	@for $i from 1 through 100 {
+		
+		$snowflake-size: 0.5 * exponent(random(30),2) + px;
+		
 		img.snowflake-#{$i} {
+			height: $snowflake-size;
 			opacity: random(50) * 0.01 + 0.1;
 			top: random(1800) - 800 + px;
 			left: random(2000) - 800 + px;
-			width: 0.5 * exponent(random(30),2) + px;
+			width: $snowflake-size;
 			transform: rotate((random(20) + deg));
-		}	
+		}
 	}
 }
-
 
 
 /* HINT */
