@@ -34,13 +34,13 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
-        options: {
-          livereload: true
-        }
-      },
+      //js: {
+      //  files: ['<%= config.app %>/scripts/{,*/}*.js'],
+      //  tasks: ['jshint'],
+      //  options: {
+      //    livereload: true
+      //  }
+      //},
       jstest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['test:watch']
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
         open: true,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
-        hostname: 'localhost'
+        hostname: '192.168.1.101'
       },
       livereload: {
         options: {

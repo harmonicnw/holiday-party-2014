@@ -1,6 +1,31 @@
 // bower:scss
 // endbower
 
+$green: #00a82b;
+$yellow: #ffd900;
+$red: #b20;
+
+
+// Sass exponent support
+@function exponent($base, $exponent) {
+  // reset value
+  $value: $base;
+  // positive intergers get multiplied
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base
+    }
+  }
+  // negitive intergers get divided. A number divided by itself is 1
+  @if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base
+    }
+  }
+  // return the last value written
+  @return ($value)
+}
+
 /* fallback */
 .fallback-message {
     font-family: sans-serif;
@@ -22,9 +47,6 @@
 }
 
 /*.impress-not-supported*/
-
-$green: #00a82b;
-$yellow: #ffd900;
 
 body {
 	background-color: $green;
@@ -60,15 +82,25 @@ a {
 }
 
 h2 {
-	color: $yellow;
+	color: $red;
+	font-weight: normal;
+	line-height: 1em;
 }
 
 h3 {
 	font-size: 1.1em;
+	font-weight: normal;
 }
 
 small {
 	font-size: 0.6em;
+}
+
+.red {
+	color: $red;	
+}
+.yellow {
+	color: $yellow;
 }
 
 .compressed {
@@ -88,27 +120,23 @@ small {
 		padding: 40px;
 		margin: 20px auto;
 		
-		img {
-			height: auto;
-			opacity: 0;
-			position: absolute;
-			right: 20px;
-			top: 95px;
-			width: 370px;
-			margin-left: -100px;
-			
-			transition: 1s all;
-			transition-delay: 400ms;
-		}
-		
 		&.active {
 			opacity: 1;
-			
-			img {
-				right: 0;
-				opacity: 1;
-			}
 		}
+	}
+	img.snowflake {
+		height: auto;
+		//opacity: 0.30;
+		position: absolute;
+	}
+	@for $i from 1 through 100 {
+		.snowflake-#{$i} {
+			opacity: random(50) * 0.01 + 0.1;
+			top: random(1800) - 800 + px;
+			left: random(2000) - 800 + px;
+			width: 0.5 * exponent(random(30),2) + px;
+			transform: rotate((random(20) + deg));
+		}	
 	}
 }
 
@@ -116,6 +144,26 @@ small {
 	font-size: 38px;
 	line-height: normal;
 	text-align: left;
+		
+	img.tree-deco {
+		height: auto;
+		opacity: 0;
+		position: absolute;
+		right: 20px;
+		top: 95px;
+		width: 370px;
+		margin-left: -100px;
+		
+		transition: 800ms all;
+		transition-delay: 1500ms;
+	}
+	
+	&.active {
+		img.tree-deco {
+			right: 0;
+			opacity: 1;
+		}
+	}
 }
 
 
@@ -135,10 +183,9 @@ small {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 200px;
+    bottom: 20px;
 
-    background: rgba(0,0,0,0.5);
-    color: #EEE;
+    //background: rgba(0,0,0,0.5);
     text-align: center;
 
     font-size: 50px;
@@ -154,27 +201,12 @@ small {
     /*
         ... and position it below the bottom of the screen (relative to it's fixed position)
     */
-    -webkit-transform: translateY(400px);
-    -moz-transform:    translateY(400px);
-    -ms-transform:     translateY(400px);
-    -o-transform:      translateY(400px);
     transform:         translateY(400px);
-
-    /*
-        Now let's imagine that the hint is visible and we want to fade it out and move out
-        of the screen.
-
-        So we define the transition on the opacity property with 1s duration and another
-        transition on transform property delayed by 1s so it will happen after the fade out
-        on opacity finished.
-
-        This way user will not see the hint moving down.
-    */
-    -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
-    -moz-transition:    opacity 1s,    -moz-transform 0.5s 1s;
-    -ms-transition:     opacity 1s,     -ms-transform 0.5s 1s;
-    -o-transition:      opacity 1s,      -o-transform 0.5s 1s;
-    transition:         opacity 1s,         transform 0.5s 1s;
+	transition:         opacity 1s,         transform 0.5s 1s;
+	
+	font-size: 0.45em;
+	color: $red;
+	line-height: 1.1em;
 }
 
 /*
@@ -185,62 +217,12 @@ small {
 /*
     ... and we will show it when the first step (with id 'bored') is active.
 */
-.impress-on-bored .hint {
+.impress-on-step-1 .hint {
     /*
         We remove the transparency and position the hint in its default fixed
         position.
     */
     opacity: 1;
-
-    -webkit-transform: translateY(0px);
-    -moz-transform:    translateY(0px);
-    -ms-transform:     translateY(0px);
-    -o-transform:      translateY(0px);
-    transform:         translateY(0px);
-
-    /*
-        Now for fade in transition we have the oposite situation from the one
-        above.
-
-        First after 4.5s delay we animate the transform property to move the hint
-        into its correct position and after that we fade it in with opacity
-        transition.
-    */
-    -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
-    -moz-transition:    opacity 1s 5s,    -moz-transform 0.5s 4.5s;
-    -ms-transition:     opacity 1s 5s,     -ms-transform 0.5s 4.5s;
-    -o-transition:      opacity 1s 5s,      -o-transform 0.5s 4.5s;
-    transition:         opacity 1s 5s,         transform 0.5s 4.5s;
+    transform: translateY(0px);
+    transition: opacity 1s 5s, transform 0.5s 4.5s;
 }
-
-/* SNOW! */
-/*
-body {
-	background-image: url(../images/snowflakes-1.png), url(../images/snowflakes-2.png), url(../images/snowflakes-3.png);
-    -webkit-animation: snow 20s linear infinite;
-    -moz-animation: snow 20s linear infinite;
-    -ms-animation: snow 20s linear infinite;
-    animation: snow 20s linear infinite;
-}
-
-@keyframes snow {
-0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
- 100% {background-position: 500px 1000px, 500px 500px, 250px 250px;}
-}
- 
-@-moz-keyframes snow {
-0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-100% {background-position: 500px 1000px, 500px 500px, 250px 250px;}
-}
- 
-@-webkit-keyframes snow {
-0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
- 50% {background-color:$green;}
- 100% {background-position: 500px 1000px, 500px 500px, 250px 250px; background-color: $green;}
-}
- 
-@-ms-keyframes snow {
-0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
- 100% {background-position: 500px 1000px, 500px 500px, 250px 250px;}
-}
-*/
