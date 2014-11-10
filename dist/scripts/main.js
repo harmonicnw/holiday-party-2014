@@ -1,1 +1,1 @@
-console.log("'Allo 'Allo!");var ij=impress();$(document).ready(function(){ij.init()});
+var ij=impress();$(document).ready(function(){ij.init();setTimeout(function(){$("#impress").animate({opacity:1},1e3)},500)});

@@ -1,5 +1,3 @@
-console.log('\'Allo \'Allo!');
-
 /*
     
     The `impress()` function also gives you access to the API that controls the presentation.
